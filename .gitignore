@@ -1,0 +1,5 @@
+./scriptcs_bin
+obj
+bin
+.vscode
+day*/input.txt
