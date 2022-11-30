@@ -1,16 +1,16 @@
 using System;
 
-string[] INPUT = File.ReadAllLines("./input.txt");
+string[] input = File.ReadAllLines("./input.txt");
 
-string Part1(string[] INPUT)
+string Part1(string[] input)
 {
-    return string.Join(" ", INPUT);
+    return string.Join(" ", input);
 }
 
-string Part2(string[] INPUT)
+string Part2(string[] input)
 {
-    return string.Concat(INPUT);
+    return string.Join(" ", input);
 }
 
-Console.WriteLine(Part1(INPUT));
-Console.WriteLine(Part2(INPUT));
+Console.WriteLine(Part1(input));
+Console.WriteLine(Part2(input));
