@@ -13,14 +13,14 @@ class Program
         List<int> GetCaloriesList(string[] input)
         {
             List<int> caloriesList = input.Select(v => v.Split("\n").Select(c => int.Parse(c)).Sum()).ToList();
-            caloriesList.Sort();
+            caloriesList.Sort((a, b) => b-a);
 
             return caloriesList;
         }
 
         int Part1(string[] input)
         {
-            return GetCaloriesList(input).Last();
+            return GetCaloriesList(input)[0];
         }
 
         int Part2(string[] input)
