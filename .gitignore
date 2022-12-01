@@ -3,3 +3,4 @@ obj
 bin
 .vscode
 day*/input.txt
+day*/*.exe

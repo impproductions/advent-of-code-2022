@@ -1,16 +1,36 @@
 using System;
-
-string[] input = File.ReadAllLines("./input.txt");
-
-string Part1(string[] input)
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+class Program
 {
-    return string.Join(" ", input);
+    static void Main()
+    {
+        string input = File.ReadAllText("./input.txt");
+        string[] data = input.Split("\n\n");
+
+        List<int> GetCaloriesList(string[] input)
+        {
+            List<int> caloriesList = input.Select(v => v.Split("\n").Select(c => int.Parse(c)).Sum()).ToList();
+            caloriesList.Sort();
+
+            return caloriesList;
+        }
+
+        int Part1(string[] input)
+        {
+            return GetCaloriesList(input).Last();
+        }
+
+        int Part2(string[] input)
+        {
+            List<int> caloriesList = GetCaloriesList(input);
+            return caloriesList.GetRange(0, 3).Sum();
+        }
+
+        Console.WriteLine(Part1(data));
+        Console.WriteLine(Part2(data));
+    }
 }
 
-string Part2(string[] input)
-{
-    return string.Join(" ", input);
-}
-
-Console.WriteLine(Part1(input));
-Console.WriteLine(Part2(input));
