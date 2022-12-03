@@ -1,6 +1,6 @@
-from os import path;
+from os import path
 
-file_path = path.relpath("./input.txt")
+file_path = path.join(path.dirname(path.abspath(__file__)) +"/input.txt")
 with open(file_path, "r") as f:
     data = f.read().splitlines()
 
