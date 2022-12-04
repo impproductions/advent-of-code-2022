@@ -10,8 +10,7 @@ data = [[list(map(int, elf.split('-'))) for elf in pair.split(',')] for pair in 
 
 
 def get_overlap(range1, range2):
-    range1, range2 = sorted((range1, range2))
-    return min(range1[1], range2[1]) - max(range1[0], range2[0]) + 1
+    return max(min(range1[1], range2[1]) - max(range1[0], range2[0]) + 1, 0)
 
 
 def get_length(range):
