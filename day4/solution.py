@@ -13,17 +13,13 @@ data = [[list(map(int, elf.split('-')))
 def get_overlap(range1, range2):
     internal_extremes = [min(range1[1], range2[1]), max(range1[0], range2[0])]
     left, right = min(internal_extremes), max(internal_extremes)
-    overlap = right - left
-    
-    if not (left in range(*range1) and left in range(*range2)):
-        overlap = -overlap
-    overlap += 1
+    overlap = right - left if left in range(*range1) and left in range(*range2) else left-right
 
-    return overlap
+    return overlap + 1
 
 
-def get_length(r):
-    return r[1]-r[0]+1
+def get_length(range):
+    return range[1]-range[0]+1
 
 
 def part1():
