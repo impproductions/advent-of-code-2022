@@ -6,24 +6,33 @@ path = Path(__file__).resolve().parent / "input.txt"
 with path.open() as file:
     input = file.read().splitlines()
 
-data = [[list(map(int, elf.split('-'))) for elf in pair.split(',')] for pair in input]
+data = [[list(map(int, elf.split('-')))
+         for elf in pair.split(',')] for pair in input]
 
-def get_overlap(range_pair):
-    # ensure range1 starts before range2
-    range1, range2 = sorted(range_pair)
-    extension = min(range2) - (max(range1) + 1)
-    hanging = max(range1) - max(range2)
+
+def get_overlap(range1, range2):
+    internal_extremes = [min(range1[1], range2[1]), max(range1[0], range2[0])]
+    left, right = min(internal_extremes), max(internal_extremes)
+    overlap = right - left
     
-    return -(min(extension, 0) + max(hanging, 0))
+    if not (left in range(*range1) and left in range(*range2)):
+        overlap = -overlap
+    overlap += 1
+
+    return overlap
+
 
 def get_length(r):
     return r[1]-r[0]+1
 
+
 def part1():
-    return len([1 for pair in data if get_overlap(pair) in [get_length(pair[0]), get_length(pair[1])]])
-    
+    return sum([1 for first, second in data if get_overlap(first, second) == min(get_length(first), get_length(second))])
+
+
 def part2():
-    return len([1 for pair in data if get_overlap(pair) > 0])
+    return sum([1 for first, second in data if get_overlap(first, second) > 0])
+
 
 print(part1())
 print(part2())
