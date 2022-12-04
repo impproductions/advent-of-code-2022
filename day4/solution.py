@@ -6,16 +6,12 @@ path = Path(__file__).resolve().parent / "input.txt"
 with path.open() as file:
     input = file.read().splitlines()
 
-data = [[list(map(int, elf.split('-')))
-         for elf in pair.split(',')] for pair in input]
+data = [[list(map(int, elf.split('-'))) for elf in pair.split(',')] for pair in input]
 
 
 def get_overlap(range1, range2):
-    internal_extremes = [min(range1[1], range2[1]), max(range1[0], range2[0])]
-    left, right = min(internal_extremes), max(internal_extremes)
-    overlap = right - left if left in range(*range1) and left in range(*range2) else left-right
-
-    return overlap + 1
+    range1, range2 = sorted((range1, range2))
+    return min(range1[1], range2[1]) - max(range1[0], range2[0]) + 1
 
 
 def get_length(range):
