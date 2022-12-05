@@ -18,8 +18,8 @@ def parse_instructions():
 
 def parse_crate_configuration():
     crate_count = int(input[0][-2])
-    return [list(reversed([line[i * 4 + 1] for line in input[0].split("\n")
-                           if line[i * 4 + 1] != ' '][:-1]))
+    return [[line[i * 4 + 1] for line in input[0].split("\n")
+            if line[i * 4 + 1] != ' '][:-1][::-1]
             for i in range(crate_count)]
 
 
@@ -33,7 +33,7 @@ def move(amt, frm, to, crates, reverse_moving_stack):
     crates[frm] = residual
     if reverse_moving_stack:
         to_move.reverse()
-    crates[to] = crates[to] + list(to_move)
+    crates[to] = crates[to] + to_move
     return crates
 
 
