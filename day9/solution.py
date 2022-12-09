@@ -30,8 +30,7 @@ def follow(H, T):
     new_pos = T
     hx, hy = H
     tx, ty = T
-    dHT = (hx-tx, hy-ty)
-    dx, dy = dHT
+    dx, dy = (hx-tx, hy-ty)
 
     if abs(dx) == 2 or abs(dy) == 2:
         new_pos = (tx + cap(dx), ty + cap(dy))
