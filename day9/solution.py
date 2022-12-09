@@ -40,7 +40,7 @@ def follow(H, T):
 
 def simulate_rope(length):
     visited = set()
-    rope = [[0,0]] + [(0, 0) for i in range(1, length)]
+    rope = [[0, 0] for i in range(0, length)]
 
     for move in moves:
         axis, amt = move
@@ -55,7 +55,7 @@ def simulate_rope(length):
                 rope[pos] = follow(rope[pos-1], rope[pos])
 
             # track the last element of the rope
-            visited.add(rope[length-1])
+            visited.add(tuple(rope[length-1]))
 
     return len(visited)
 
