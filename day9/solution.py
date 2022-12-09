@@ -22,18 +22,14 @@ def sign(n):
         return 1
 
 
-def cap(n):
-    return sign(n) * min(abs(n), 1)
-
-
 def follow(H, T):
     new_pos = T
     hx, hy = H
     tx, ty = T
     dx, dy = (hx-tx, hy-ty)
 
-    if abs(dx) == 2 or abs(dy) == 2:
-        new_pos = (tx + cap(dx), ty + cap(dy))
+    if abs(dx) > 1 or abs(dy) > 1:
+        new_pos = (tx + sign(dx), ty + sign(dy))
 
     return tuple(new_pos)
 
