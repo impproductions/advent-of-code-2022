@@ -23,15 +23,14 @@ def sign(n):
 
 
 def follow(H, T):
-    new_pos = T
     hx, hy = H
     tx, ty = T
     dx, dy = (hx-tx, hy-ty)
 
     if abs(dx) > 1 or abs(dy) > 1:
-        new_pos = (tx + sign(dx), ty + sign(dy))
+        return [tx + sign(dx), ty + sign(dy)]
 
-    return tuple(new_pos)
+    return T
 
 
 def simulate_rope(length):
