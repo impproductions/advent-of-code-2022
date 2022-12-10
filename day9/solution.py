@@ -1,6 +1,4 @@
 from pathlib import Path
-from math import ceil, floor
-from pprint import pprint
 
 path = Path(__file__).parent / "input.txt"
 with path.open() as file:
