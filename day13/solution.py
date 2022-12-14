@@ -43,7 +43,7 @@ def compare_chars(pair, index=0):
     else:
         # shift the main signal forward by 1,
         # add a ] next to the int on the other signal
-        # and restart comparing from index 0
+        # and restart comparing from current index
         # ie [A[C]]   -> A][C]]
         #    [[A][B]] -> A][B]]
         new_pair = pair[:]
