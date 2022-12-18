@@ -82,6 +82,7 @@ def part2():
     for i in range(0, 4000001):
         amt, x = check_line(i)
         if x < 4000001:
+            print(x)
             return 4000000 * x + i
 
 
