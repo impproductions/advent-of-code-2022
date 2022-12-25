@@ -1,25 +1,8 @@
 from pathlib import Path
-from math import lcm, gcd
-from pprint import pprint
 
-path = Path(__file__).parent / "input.txt"
+path = Path(__file__).parent / "example.txt"
 with path.open() as file:
     input = file.read().splitlines()
-
-
-def print_map_for_round(map, round, points=set()):
-    print("Round", round)
-    for y, row in enumerate(area):
-        line = ""
-        for x, col in enumerate(row):
-            val = map.get((x, y))
-            if (x, y) in points:
-                line += "X"
-            else:
-                line += str(val.get(round)
-                            ) if val.get(round) is not None else col
-        print(line)
-    print("---------")
 
 
 def get_value_map():
@@ -40,7 +23,7 @@ def get_value_map():
             v_rounds.append(u + d)
 
         states[point] = {i: h_rounds[i % h_cycle] + v_rounds[i % v_cycle]
-                           for i in range(h_cycle * v_cycle)}
+                         for i in range(h_cycle * v_cycle)}
     return states
 
 
@@ -65,10 +48,11 @@ def travel(start, finish, start_round):
     while True:
         free = set(p for p in states
                    if states.get(p, {}).get(round % (h_cycle * v_cycle), 9) == 0) | always_free
-        
-        nbh = set(nbh_point for point in iter(to_explore) for nbh_point in get_neighborhood(point))
+
+        nbh = set(nbh_point for point in iter(to_explore)
+                  for nbh_point in get_neighborhood(point))
         to_explore = nbh & free
-        
+
         if finish in to_explore:
             break
         round += 1
