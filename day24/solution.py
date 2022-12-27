@@ -1,6 +1,6 @@
 from pathlib import Path
 
-path = Path(__file__).parent / "example.txt"
+path = Path(__file__).parent / "input.txt"
 with path.open() as file:
     input = file.read().splitlines()
 
@@ -45,28 +45,25 @@ def travel(start, finish, start_round):
     always_free = {(0, -1), (h_cycle-1, v_cycle)}
 
     to_explore = {start}
-    while True:
+    while not finish in to_explore:
         free = set(p for p in states
                    if states.get(p, {}).get(round % (h_cycle * v_cycle), 9) == 0) | always_free
-
         nbh = set(nbh_point for point in iter(to_explore)
                   for nbh_point in get_neighborhood(point))
         to_explore = nbh & free
-
-        if finish in to_explore:
-            break
         round += 1
-    return round
+
+    return round - 1
 
 
 def part1():
-    return travel((0, 0), (h_cycle-1, v_cycle-1), 0) + 1
+    return travel((0, -1), (h_cycle-1, v_cycle), 0)
 
 
 def part2():
     there = travel((0, -1), (h_cycle-1, v_cycle), 0)
-    back = travel((h_cycle-1, v_cycle), (0, -1), there + 1)
-    and_back_again = travel((0, -1), (h_cycle-1, v_cycle), back + 1)
+    back = travel((h_cycle-1, v_cycle), (0, -1), there)
+    and_back_again = travel((0, -1), (h_cycle-1, v_cycle), back)
 
     return and_back_again
 
